@@ -1,4 +1,22 @@
+import os, threading
+from flask import Flask
 
+app = Flask(__name__)
+
+@app.get("/")
+def health():
+    return "Bot is running!"
+
+def run_http():
+    port = int(os.environ.get("PORT", 10000))
+    # важное: слушаем 0.0.0.0 и порт из ENV
+    app.run(host="0.0.0.0", port=port)
+
+# поднимаем http-сервер в отдельном потоке,
+# а основной поток остаётся для бота (polling)
+threading.Thread(target=run_http, daemon=True).start()
+
+print("HTTP health server started")
 import os
 import csv
 import random
