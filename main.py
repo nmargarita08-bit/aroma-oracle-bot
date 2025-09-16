@@ -34,6 +34,6 @@ async def help_cmd(message: types.Message):
     await message.answer("Доступные команды:\n/start - приветствие\n/help - помощь")
 
 # === Запуск бота ===
-if __name__ == "__main__":
+if name == "__main__":
     print("Telegram bot starting...")
     executor.start_polling(dp, skip_updates=True)
